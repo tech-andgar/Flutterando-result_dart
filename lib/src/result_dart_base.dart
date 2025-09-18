@@ -110,6 +110,15 @@ sealed class ResultDart<S extends Object, F extends Object> {
     G Function(S success) onSuccess,
     W Function(F failure) onFailure,
   );
+
+  /// Returns a record containing both success and error values,
+  /// with one of them being null.
+  ///
+  /// This allows for easy destructuring using Dart 3's record patterns.
+  ///
+  /// Example:
+  /// final (:success, :error) = result.getBoth();
+  ({S? success, F? error}) getBoth();
 }
 
 /// Success Result.
@@ -259,6 +268,11 @@ final class Success<S extends Object, F extends Object> //
       (f) => Failure(failure),
     );
   }
+
+  @override
+  ({S? success, F? error}) getBoth() {
+    return (success: _success, error: null);
+  }
 }
 
 /// Error Result.
@@ -404,5 +418,10 @@ final class Failure<S extends Object, F extends Object> //
       (s) => Success(success),
       (f) => Failure(failure),
     );
+  }
+
+  @override
+  ({S? success, F? error}) getBoth() {
+    return (success: null, error: _failure);
   }
 }
