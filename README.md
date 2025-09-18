@@ -295,6 +295,25 @@ void main() {
 }
 ```
 
+#### Handling the Result with `getBoth` (from Dart 3)
+
+Returns a record containing both success and error values,
+with one of them being null.
+This allows for easy destructuring using Dart 3's record patterns.
+
+```dart
+void main() {
+    final result = getSomethingPretty();
+    final (:success, :error) = result.getBoth();
+
+    if (success != null) {
+      print('Operation succeeded with: $success');
+    } else {
+      print('Operation failed with: $error');
+    }
+}
+```
+
 ### Transforming a Result
 
 #### Mapping success value with `map`
@@ -491,7 +510,7 @@ e 🚧 para o que está sendo trabalhado ---->
 ## Features
 
 - ✅ Result implementation.
-- ✅ Result`s operators(map, flatMap, mapError, flatMapError, swap, when, fold, getOrNull, exceptionOrNull, isSuccess, isError).
+- ✅ Result`s operators(map, flatMap, mapError, flatMapError, swap, when, fold, getOrNull, exceptionOrNull, isSuccess, isError, getBoth).
 - ✅ AsyncResult implementation.
 - ✅ AsyncResult`s operators(map, flatMap, mapError, flatMapError, swap, when, fold, getOrNull, exceptionOrNull, isSuccess, isError).
 - ✅ Auxiliar functions (id, identity, success, failure).
