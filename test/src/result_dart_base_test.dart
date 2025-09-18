@@ -8,4 +8,22 @@ void main() {
     expect(result, isA<Success<int, String>>());
     expect(result.getOrThrow(), 1);
   });
+  group('getBoth', () {
+    test('should return a record with success value and null error on Success',
+        () {
+      final result = Success<String, Exception>('success');
+      final (:success, :error) = result.getBoth();
+      expect(success, 'success');
+      expect(error, isNull);
+    });
+
+    test('should return a record with null success and error value on Failure',
+        () {
+      final exception = Exception('failure');
+      final result = Failure<String, Exception>(exception);
+      final (:success, :error) = result.getBoth();
+      expect(success, isNull);
+      expect(error, exception);
+    });
+  });
 }
