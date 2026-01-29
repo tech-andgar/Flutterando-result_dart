@@ -117,8 +117,8 @@ sealed class ResultDart<S extends Object, F extends Object> {
   /// This allows for easy destructuring using Dart 3's record patterns.
   ///
   /// Example:
-  /// final (:success, :error) = result.getBoth();
-  ({S? success, F? error}) getBoth();
+  /// final (:success, :failure) = result.getBoth();
+  ({S? success, F? failure}) getBoth();
 }
 
 /// Success Result.
@@ -270,8 +270,8 @@ final class Success<S extends Object, F extends Object> //
   }
 
   @override
-  ({S? success, F? error}) getBoth() {
-    return (success: _success, error: null);
+  ({S? success, F? failure}) getBoth() {
+    return (success: _success, failure: null);
   }
 }
 
@@ -421,7 +421,7 @@ final class Failure<S extends Object, F extends Object> //
   }
 
   @override
-  ({S? success, F? error}) getBoth() {
-    return (success: null, error: _failure);
+  ({S? success, F? failure}) getBoth() {
+    return (success: null, failure: _failure);
   }
 }

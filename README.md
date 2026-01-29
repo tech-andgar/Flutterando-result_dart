@@ -304,12 +304,12 @@ This allows for easy destructuring using Dart 3's record patterns.
 ```dart
 void main() {
     final result = getSomethingPretty();
-    final (:success, :error) = result.getBoth();
+    final (:success, :failure) = result.getBoth();
 
     if (success != null) {
       print('Operation succeeded with: $success');
     } else {
-      print('Operation failed with: $error');
+      print('Operation failed with: $failure');
     }
 }
 ```
